@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+	
+    
+   $(function()
+	{
+
+      
+	var cargarPreguntas = function()
+		{	
+			    preguntasList.push(
+                {
+                  preguntaId : 1,
+                  Nombre : 'Quien es jesus?',
+                  Respuestas :
+                  [
+                      {respuestaId : 1, preguntaId: 1, respuesta : 'El hijo de Dios', esCorrecta : true},
+                      {respuestaId : 2, preguntaId: 1, respuesta : 'El hijo de adam', esCorrecta : false},
+                      {respuestaId : 3, preguntaId: 1, respuesta : 'El hijo de abraham', esCorrecta : false},
+                      {respuestaId : 4, preguntaId: 1, respuesta : 'El hijo de jeremias', esCorrecta : false}                 
+                  ]
+            	},
+                {
+                  preguntaId : 2,
+                  Nombre : 'Quien es kaim?',
+                  Respuestas :
+                  [
+                      {respuestaId : 5, preguntaId: 2, respuesta : 'El hijo de Dios', esCorrecta : false},
+                      {respuestaId : 6, preguntaId: 2, respuesta : 'El hijo de adam', esCorrecta : true},
+                      {respuestaId : 7, preguntaId: 2, respuesta : 'El hijo de abraham', esCorrecta : false},
+                      {respuestaId : 8, preguntaId: 2, respuesta : 'El hijo de jeremias', esCorrecta : false}                 
+                  ]
+            	}
+            )
+		};
+
+		
+		
+
+
+	var participantesList = [
+    	{ nombre : 'Juan Mitchell' },
+        { nombre : 'Carlos Pineda' }
+    ]; //aqui se guardaran los participantes que participaran
+
+	var preguntasList = []; // aqui se guardaran todas las preguntas habiles para el juego
+
+	
+	var comodinesRonda = 
+	{
+		nombre : null,
+		fueUtilizado : null
+	};
+
+	var PreguntasRonda =
+	{
+		preguntaId : null,
+		Pregunta : null,
+		contestada : false,
+		contestadaCorrectamente : false,
+		Respuestas : [] // lista de respuestasRondaJuego
+	};
+
+	var RespuestasRondaJuego =
+	{
+		respuestaId : null, 
+		preguntaId : null, 
+		respuesta : null,
+		esCorrecta : false
+	};
+    
+    
+    
+    var participanteRondaJuego =
+	{
+		nombre : null,
+		comodinesRonda : []	
+	};
+    
+    var comodinesRondaList  = [
+    	{nombre : '50/50'},
+        {nombre : 'Biblia'}
+    ];
+    
+      var rondaJuego =
+	{
+		ordenRonda : null,
+		participanteRondaJuego : [] // lista de participantesRondaJuego
+	};
+    
+    var juego = 
+	{
+		cantidadRonda : null,	
+		cantidadPreguntasPorRonda : null,
+		rondasJuego : []
+	};
+	
+	//lista[0].preguntas[0]
+
+	
+    
+    
+	var armarJuego = function(cantidadRonda,cantidadPreguntasPorRonda, participantes )
+		{
+		 	juego.cantidadRonda = cantidadRonda;
+            juego.cantidadPreguntasPorRonda = cantidadPreguntasPorRonda;
+            
+            for (var i = 0; i < juego.cantidadRonda; i++) 
+            {
+            	juego.rondasJuego.push
+                (
+                	{ordenRonda : i+1, participanteRondaJuego : [] }
+                );
+                          
+                $.each(participantesList, function( key, value )
+                    {
+                        juego.rondasJuego[i].participanteRondaJuego.push
+                        (
+                        	{ nombre : value.nombre, comodinesRonda : [], preguntasJuegos :[]  }
+                        ); 
+                        
+                        juego.rondasJuego[i].participanteRondaJuego[key].comodinesRonda.push
+                        (
+                        	{nombre : '50/50', utilizado : false},
+        					{nombre : 'Biblia', utilizado : false}
+                        );
+                        
+                        
+                        for (var ii= 0; ii< juego.cantidadPreguntasPorRonda; ii++)
+                        {                            
+                        	juego.rondasJuego[i].participanteRondaJuego[key].preguntasJuegos.push
+                            (
+                              { 
+                              	preguntaId : preguntasList[0].preguntaId,
+                              	nombre : preguntasList[0].Nombre,
+                                contestada : false,
+                                contestadaCorrectamente : false,
+                                Respuestas : []
+                              }	
+                            );
+							
+                            
+                            juego.rondasJuego[i].participanteRondaJuego[key].preguntasJuegos[ii].Respuestas.push(
+                                preguntasList[0].Respuestas
+                            );
+
+                            preguntasList.splice(preguntasList.indexOf(preguntasList[i]), 0);
+                            
+                        }
+                        
+                    }); 
+                    
+            }; 
+            
+		};
+
+	
+    cargarPreguntas();
+    armarJuego(1,2);
+    console.log(JSON.stringify(juego));
+    //alert('exito');
+	
+	});
+	
+    
+
+</script>
+
+</head>
+<body>
+
+
+</body>
+</html>
