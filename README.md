@@ -1,2 +1,2 @@
-TROP
+QUIZ BIBLICO
 ====
