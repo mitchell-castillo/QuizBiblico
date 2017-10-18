@@ -22,6 +22,30 @@
 		{ "respuesta" : "El hijo de jeremias", "esLaCorrecta" : false },
 		{ "respuesta" : "El hijo de adam", "esLaCorrecta" : false }
 	]
+},
+	{
+	"Descripcion" : "pregunta ejemplo 3?",
+	"citaBiblica" : "Juan 3:16",
+	"Libro" : "Genesis",
+	"Respuestas" : 
+	[
+		{ "respuesta" : "El hijo de Dios", "esLaCorrecta" : true },
+		{ "respuesta" : "El hijo de abraham", "esLaCorrecta" : false },
+		{ "respuesta" : "El hijo de jeremias", "esLaCorrecta" : false },
+		{ "respuesta" : "El hijo de adam", "esLaCorrecta" : false }
+	]
+},
+{
+	"Descripcion" : "PRegunta ejemplo 4 ?",
+	"citaBiblica" : "Juan 3:16",
+	"Libro" : "Genesis",
+	"Respuestas" : 
+	[
+		{ "respuesta" : "El hijo de Dios", "esLaCorrecta" : true },
+		{ "respuesta" : "El hijo de abraham", "esLaCorrecta" : false },
+		{ "respuesta" : "El hijo de jeremias", "esLaCorrecta" : false },
+		{ "respuesta" : "El hijo de adam", "esLaCorrecta" : false }
+	]
 }
 	
 ]
