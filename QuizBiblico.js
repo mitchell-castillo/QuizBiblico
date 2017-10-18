@@ -5,10 +5,10 @@
 	"Libro" : "Genesis",
 	"Respuestas" : 
 	[
-		{ "Descripcion" : "El hijo de Dios", "esCorrecta" : true },
-		{ "Descripcion" : "El hijo de abraham", "esCorrecta" : false },
-		{ "Descripcion" : "El hijo de jeremias", "esCorrecta" : false },
-		{ "Descripcion" : "El hijo de adam", "esCorrecta" : false }
+		{ "respuesta" : "El hijo de Dios", "esLaCorrecta" : true },
+		{ "respuesta" : "El hijo de abraham", "esLaCorrecta" : false },
+		{ "respuesta" : "El hijo de jeremias", "esLaCorrecta" : false },
+		{ "respuesta" : "El hijo de adam", "esLaCorrecta" : false }
 	]
 },
 {
@@ -17,10 +17,10 @@
 	"Libro" : "Genesis",
 	"Respuestas" : 
 	[
-		{ "Descripcion" : "El hijo de Dios", "esCorrecta" : true },
-		{ "Descripcion" : "El hijo de abraham", "esCorrecta" : false },
-		{ "Descripcion" : "El hijo de jeremias", "esCorrecta" : false },
-		{ "Descripcion" : "El hijo de adam", "esCorrecta" : false }
+		{ "respuesta" : "El hijo de Dios", "esLaCorrecta" : true },
+		{ "respuesta" : "El hijo de abraham", "esLaCorrecta" : false },
+		{ "respuesta" : "El hijo de jeremias", "esLaCorrecta" : false },
+		{ "respuesta" : "El hijo de adam", "esLaCorrecta" : false }
 	]
 }
 	
