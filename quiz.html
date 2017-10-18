@@ -127,7 +127,7 @@ app.controller('jsCtrl', function($scope, $interval, $http) {
 
 	$scope.buscarPreguntas = function() {
 			
-			return $http.get("https://raw.githubusercontent.com/ukkanes/QuizBiblico/master/QuizBiblico.js").then(function(response) {
+			return $http.get("https://raw.githubusercontent.com/ukkanes/QuizBiblico/master/preguntas.js").then(function(response) {
 					
 					$scope.preguntasRepository = response.data;
 				});
