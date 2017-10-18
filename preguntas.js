@@ -1,51 +1,14 @@
 [
-{
-	"Descripcion" : "Quien es Jesus?",
-	"citaBiblica" : "Juan 3:16",
-	"Libro" : "Genesis",
-	"Respuestas" : 
-	[
-		{ "respuesta" : "El hijo de Dios", "esLaCorrecta" : true },
-		{ "respuesta" : "El hijo de abraham", "esLaCorrecta" : false },
-		{ "respuesta" : "El hijo de jeremias", "esLaCorrecta" : false },
-		{ "respuesta" : "El hijo de adam", "esLaCorrecta" : false }
-	]
-},
-{
-	"Descripcion" : "Quien es jose ?",
-	"citaBiblica" : "Juan 3:16",
-	"Libro" : "Genesis",
-	"Respuestas" : 
-	[
-		{ "respuesta" : "El hijo de Dios", "esLaCorrecta" : true },
-		{ "respuesta" : "El hijo de abraham", "esLaCorrecta" : false },
-		{ "respuesta" : "El hijo de jeremias", "esLaCorrecta" : false },
-		{ "respuesta" : "El hijo de adam", "esLaCorrecta" : false }
-	]
-},
-	{
-	"Descripcion" : "pregunta ejemplo 3?",
-	"citaBiblica" : "Juan 3:16",
-	"Libro" : "Genesis",
-	"Respuestas" : 
-	[
-		{ "respuesta" : "El hijo de Dios", "esLaCorrecta" : true },
-		{ "respuesta" : "El hijo de abraham", "esLaCorrecta" : false },
-		{ "respuesta" : "El hijo de jeremias", "esLaCorrecta" : false },
-		{ "respuesta" : "El hijo de adam", "esLaCorrecta" : false }
-	]
-},
-{
-	"Descripcion" : "PRegunta ejemplo 4 ?",
-	"citaBiblica" : "Juan 3:16",
-	"Libro" : "Genesis",
-	"Respuestas" : 
-	[
-		{ "respuesta" : "El hijo de Dios", "esLaCorrecta" : true },
-		{ "respuesta" : "El hijo de abraham", "esLaCorrecta" : false },
-		{ "respuesta" : "El hijo de jeremias", "esLaCorrecta" : false },
-		{ "respuesta" : "El hijo de adam", "esLaCorrecta" : false }
-	]
-}
-	
+{"Descripcion" : "QUIEN ES DIOS ?","citaBiblica" : "JUAN 3:16","Libro" : "1","Respuestas" : [{ "respuesta" : "El creador del universo", "esLaCorrecta" : true },{ "Descripcion" : "El dios del mal", "esCorrecta" : false },{ "Descripcion" : "el hijo de adan", "esCorrecta" : false },{ "Descripcion" : "el hijo de abraham", "esCorrecta" : false }]},
+{"Descripcion" : "QUIEN ES LUCIFER ?","citaBiblica" : "JUAN 3:17","Libro" : "1","Respuestas" : [{ "Descripcion" : "El dios del mal", "esCorrecta" : true },{ "Descripcion" : "El creador del universo", "esCorrecta" : false },{ "Descripcion" : "el hijo de adan", "esCorrecta" : false },{ "Descripcion" : "el hijo de abraham", "esCorrecta" : false }]},
+{"Descripcion" : "PRIMER NOMBRE QUE APARECE EN EL LIBRO DE HECHOS","citaBiblica" : "HECHOS 1: 1","Libro" : "2","Respuestas" : [{ "Descripcion" : "Teofilo", "esCorrecta" : true },{ "Descripcion" : "Pablo", "esCorrecta" : false },{ "Descripcion" : "Juan", "esCorrecta" : false },{ "Descripcion" : "Jacono", "esCorrecta" : false }]},
+{"Descripcion" : "¿CUANTOS DÍAS ESTUVO JESÚS CON LOS DISCÍPULOS DESPUÉS DE SU RESURRECCIÓN? ","citaBiblica" : "HECHOS 1: 3","Libro" : "2","Respuestas" : [{ "Descripcion" : "40 dias", "esCorrecta" : true },{ "Descripcion" : "25 dias", "esCorrecta" : false },{ "Descripcion" : "10 dias", "esCorrecta" : false },{ "Descripcion" : "41 dias", "esCorrecta" : false }]},
+{"Descripcion" : "¿QUE RECIBIREMOS CUANDO VENGA SOBRE NOSOTROS EN ESPÍRITU SANTO?","citaBiblica" : "HECHOS 1: 8","Libro" : "2","Respuestas" : [{ "Descripcion" : "Recibiremos poder", "esCorrecta" : true },{ "Descripcion" : "Recibiremos gloria", "esCorrecta" : false },{ "Descripcion" : "Recibiremos ayuda", "esCorrecta" : false },{ "Descripcion" : "Recibiremos dinero", "esCorrecta" : false }]},
+{"Descripcion" : "DESPUÉS QUE JESÚS HABÍA RESUCITADO ¿DE QUE LES HABLABA A LOSAPÓSTOLES?","citaBiblica" : "HECHOS 1:3","Libro" : "2","Respuestas" : [{ "Descripcion" : "Del reino de Dios", "esCorrecta" : true },{ "Descripcion" : "Del dinero", "esCorrecta" : false },{ "Descripcion" : "De las obras", "esCorrecta" : false },{ "Descripcion" : "De la fe", "esCorrecta" : false }]},
+{"Descripcion" : "¿DENTRO DE CUANTO TIEMPO LES DIJO JESÚS A SUS DISCÍPULOS QUE SERIAN BAUTIZADOS POR EL ESPÍRITU SANTO?","citaBiblica" : "HECHOS 1:5","Libro" : "2","Respuestas" : [{ "Descripcion" : "Dentro de no muchos dias", "esCorrecta" : true },{ "Descripcion" : "En una semana", "esCorrecta" : false },{ "Descripcion" : "En un año despues", "esCorrecta" : false },{ "Descripcion" : "Por la tarde", "esCorrecta" : false }]},
+{"Descripcion" : "¿QUIENES SE LES APARECIERON A LOS DISCÍPULOS CUANDO JESUS ESTABA ASCENDIENDO AL CIELO?","citaBiblica" : "HECHOS 1:10","Libro" : "2","Respuestas" : [{ "Descripcion" : "2 Varones con vestiduras blancas", "esCorrecta" : true },{ "Descripcion" : "Gabriel y Jacobo", "esCorrecta" : false },{ "Descripcion" : "Moises y Elias", "esCorrecta" : false },{ "Descripcion" : "Salomon y David", "esCorrecta" : false }]},
+{"Descripcion" : "¿EN QUE FUE ALZADO JESÚS?","citaBiblica" : "HECHOS 1:9","Libro" : "2","Respuestas" : [{ "Descripcion" : "En una nube", "esCorrecta" : true },{ "Descripcion" : "En un viento", "esCorrecta" : false },{ "Descripcion" : "En un carro de fuego", "esCorrecta" : false },{ "Descripcion" : "En dos nubes", "esCorrecta" : false }]},
+{"Descripcion" : "¿CUANTOS ERAN LOS REUNIDOS EN EL APOSENTO?","citaBiblica" : "HECHOS 1:15","Libro" : "2","Respuestas" : [{ "Descripcion" : "120", "esCorrecta" : true },{ "Descripcion" : "12", "esCorrecta" : false },{ "Descripcion" : "3000", "esCorrecta" : false },{ "Descripcion" : "150", "esCorrecta" : false }]},
+{"Descripcion" : "¿COMO SE LLAMA EL CAMPO DONDE MURIÓ JUDAS?","citaBiblica" : "HECHOS 1:19","Libro" : "2","Respuestas" : [{ "Descripcion" : "Acéldama", "esCorrecta" : true },{ "Descripcion" : "Campo de luz", "esCorrecta" : false },{ "Descripcion" : "Rancho Judas", "esCorrecta" : false },{ "Descripcion" : "Campo de traicion", "esCorrecta" : false }]},
+{"Descripcion" : "¿QUIEN FUE EL SUSTITUTO DE JUDAS?","citaBiblica" : "HECHOS 1:26","Libro" : "2","Respuestas" : [{ "Descripcion" : "Matias", "esCorrecta" : true },{ "Descripcion" : "Jacobo", "esCorrecta" : false },{ "Descripcion" : "Pedro", "esCorrecta" : false },{ "Descripcion" : "Zaqueo", "esCorrecta" : false }]}
 ]
