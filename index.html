@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sola scriptura </title>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/estilo.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="myApp" ng-controller="jsCtrl">
+	
+	<header class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1 class="display-5 text-center">Sola scriptura </h1>
+		</div>	  
+	</header>
+	
+	<!-- Botones Disparadores del juegos y las reglas del juego -->
+	<section class="container" style="margin-top: 35rem;">
+		<div class="d-flex justify-content-center align-items-center align-content-center flex-column">
+			<button class="btn  btn-lg btn-primary" style="margin-bottom: 20px; padding: 10px 40px;" data-toggle="modal" data-target="#modal-iniciar-juego">
+				Jugar
+			</button>
+			<button class="btn  btn-lg btn-primary" style="padding: 10px 20px;" data-toggle="modal" data-target="#reglasJuego" >
+				Reglas del Juego
+			</button>
+		</div>
+	</section>
+
+	<!-- Modal Reglas de Juegos-->
+	<div class="modal fade" id="reglasJuego" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title" id="ModalLabel">Reglas del Juego</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		  </div>
+		  <div class="modal-body">
+		  <ol class="reglas-list">
+			<li>Al momento de seleccionar una respuesta el juego no permite cambiar de elección.</li>
+			<li>El juego tendrá un moderador quien dirigirá todo el proceso del mismo.</li>
+			<li>La cantidad de rondas a jugar será definida al inicio del juego. El juego permite definir un máximo de 3 rondas.</li>
+			<li>Los comodines <strong>50/50, Cita Bíblica y Ayuda Externa</strong> estarán disponibles por ronda por participantes o grupo.</li>
+			<li>La biblia solo podrá utilizarse al momento de seleccionar el comodín <strong>Cita Bíblica.</strong></li>
+			<li>El comodín <strong>50/50</strong> consiste en dejar solo 2 opciones de las 4 posibles respuestas.</li>
+			<li>El comodín <strong>Ayuda Externa</strong> permite realizar una llamada telefónica a una persona que no esté presente en lugar de la competencia o 
+				preguntar a alguien que no esté participando en el juego y esté presente en la sala.</li>
+			<li>El comodín <strong>Cita Bíblica</strong> permite realizar una búsqueda en la biblia, contando el tiempo definido para contestar las preguntas.</li>
+			<li>El o los participantes tendrán el tiempo que se haya definido al inicio del juego para responder cada pregunta. El juego permite un máximo de 180 segundos.</li>
+			<li>En caso de estar participando varios equipos, los mismos deben seleccionar un miembro quien fungirá de vocero y estará habilitado para responder las preguntas.</li>
+			<li>	La puntuación de los participantes o equipos será tomada por la cantidad de preguntas contestadas correctamente.</li>
+			<li>La cantidad de preguntas por ronda para cada participante o equipo será definida al inicio del juego. El juego permite definir un máximo de 15 preguntas por participante.</li>
+			<li>Los participantes deben permanecer en silencio al momento que otros estén al turno de contestar las preguntas.</li>
+			<li>El moderador puede cancelar la ronda de un participante o equipo si se comete alguna falta o infracción.</li>
+		  </ol>
+
+		  </div>
+		  <div class="modal-footer">
+			<div class="footer-button">
+				<button type="button" class="btn btn-danger" style="font-size: 1.3rem;" data-dismiss="modal">Cerrar</button>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	<!-- End Reglas de Juegos-->
+	
+	<!-- Modal Iniciacion del Juego -->
+	<div class="modal fade" id="modal-iniciar-juego" tabindex="-1" role="dialog" aria-labelledby="ModalLabel-1" aria-hidden="true">
+	  <div class="modal-dialog" id="iniciar-juego" role="document">
+		
+		<div id="contenido">
+			<div class="modal-content">
+				<div class="modal-header" id="modal-header">
+					<h5 class="modal-title" id="ModalLabel-1">Preparación del Juego</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="modal-body">
+					<form class="form-preparacion" name="myForm">
+					  <div class="form-group">
+					  <label for="CantidadRondas">Cantidad de Rondas</label>
+						<input type="number" class="form-control" name="cantidadRondas" ng-model="cantidadRondas" min="1" max="99" required>
+							<div class="alerts">
+								<div class="alert alert-danger"  ng-show="myForm.cantidadRondas.$error.required"> FALTAN DATOS REQUERIDOS </div>
+								<div class="alert alert-danger"  ng-show="myForm.cantidadRondas.$error.min"> El VALOR MINIMO ES 1 </div>
+								<div class="alert alert-danger"  ng-show="myForm.cantidadRondas.$error.max"> El VALOR MAXIMO ES 99 </div>
+							</div>
+						<!--
+						<label for="CantidadRondas">Cantidad de Rondas</label>
+						<select class="form-control" id="CantidadRondas" ng-model="cantidadRondas">
+						  <option>1</option>
+						  <option>2</option>
+						  <option>3</option>
+						</select> -->
+					  </div>
+					  <div class="form-group">
+						<label for="CantidadPreguntas">Cantidad de Preguntas</label>
+						<input type="number" class="form-control" name="cantidadPreguntasPorRonda"  ng-model="cantidadPreguntasPorRonda" min="1" max="999" required>
+						<div class="alerts">
+							<div class="alert alert-danger" ng-show="myForm.cantidadPreguntasPorRonda.$error.required"> FALTAN DATOS REQUERIDOS </div>
+							<div class="alert alert-danger" ng-show="myForm.cantidadPreguntasPorRonda.$error.min"> El VALOR MINIMO ES 1 </div>
+							<div class="alert alert-danger" ng-show="myForm.cantidadPreguntasPorRonda.$error.max"> El VALOR MAXIMO ES 999 </div>
+						</div>
+						<!--
+						<select class="form-control" id="CantidadPreguntas" ng-model=cantidadPreguntasPorRonda>
+						  <option>5</option>
+						  <option>10</option>
+						  <option>15</option>
+						</select> -->
+					  </div>
+					  <div class="form-group">
+						<label for="Equipos">Participantes</label> 
+						<div class="pull-right">
+							<a href="#" id="plus"><i class="fa fa-plus fa-lg" aria-hidden="true" ng-click="addParticipante();" ng-disabled="myForm.$invalid"></i></a>
+						</div>
+						<input type="text" class="form-control" id="Equipos" value="Participante 1" ng-model="nuevoParticipante" required>
+						<ul class="participates-add">
+						<li ng-repeat="participante in participantes" class="particinteList">
+						  <span class="fa fa-close" ng-click="deleteParticipante($index)"></span>
+						  <span >{{participante}}</span>
+						</li>
+					  </ul>
+					  </div>
+					  <div class="form-group">
+						<label for="Equipos">Libros de la Biblia</label> 
+						<div class="antiguo-test testamento" id="testamento-1">Antiguo Testamento
+							<div class="pull-right" style="color: #ccc">
+								<a href="#" id="plus"><i class="fa fa-plus fa-lg" aria-hidden="true"></i></a>
+							</div>
+						</div>
+							<div class="container-form-check row" id="form-check-1">
+								<!--
+								<div class="form-check form-check-inline col-md-2">
+								  <label class="form-check-label">
+									<input class="form-check-input" type="checkbox" value="">
+									Libro Uno
+								  </label>
+								</div> 
+								<div class="form-check form-check-inline col-md-2">
+								  <label class="form-check-label">
+									<input class="form-check-input" type="checkbox" value="">
+									Libro Uno
+								  </label>
+								</div>  
+								-->
+							</div><!--  container-form-check  -->
+						<div class="nuevo-test testamento" id="testamento-2">Nuevo Testamento
+							<div class="pull-right" style="color: #ccc">
+								<a href="#" id="plus"><i class="fa fa-plus fa-lg" aria-hidden="true"></i></a>
+							</div>
+						</div>
+							<div class="container-form-check row" id="form-check-2">
+								<!--
+								<div class="form-check form-check-inline col-md-2">
+								  <label class="form-check-label">
+									<input class="form-check-input" type="checkbox" value="">
+									Libro Uno
+								  </label>
+								</div> 
+								<div class="form-check form-check-inline col-md-2">
+								  <label class="form-check-label">
+									<input class="form-check-input" type="checkbox" value="">
+									Libro Uno
+								  </label>
+								</div>  
+								-->
+							</div><!--  container-form-check  -->
+					  </div>
+					  <style>
+					  
+						</style>
+					  <div class="form-group">
+						<label for="Equipos">Cantidad Segundos para Responder </label> 
+						<div id="slidecontainer">
+						  <input type="range" min="1" max="180" value="30" class="slider" id="myRange" ng-model="cantidadSegundosResponder">
+						  <div id="showRange" class="show-range"></div>
+						</div>
+					  </div>
+					</form>
+				</div>
+			  <div class="modal-footer">
+				<div class="footer-button">
+					<button type="button" class="btn btn-success" id="boton-iniciar" style="font-size: 1.3rem;" >Iniciar</button>
+					<button type="button" class="btn btn-danger" id="boton-cancelar" data-dismiss="modal" style="font-size: 1.3rem;" >Cancelar</button>
+				</div>
+			  </div>
+			</div>
+		</div>
+		
+	  </div>
+	</div>
+	<!-- End Iniciacion del Juego -->
+
+	
+	
+<!--   iniciar la parte de juan mitchell  -->
+<h1>QUIZ BIBLICO:</h1>
+
+
+{{ mensaje }}
+
+<div ng-repeat="ronda in rondas">
+
+	<div style="border:1px solid black;" ng-show="ronda.rondaVigente">
+	
+		{{ ronda.nombreRonda}}
+
+		<div ng-repeat="participante in ronda.participantes">
+		
+		<div ng-show="participante.participanteActual" ng-init="ronda.participantes[0].participanteActual = true">
+		
+			{{ participante.nombre }}
+			
+			
+			<div ng-repeat="comodin in participante.comodines" ng-show=iniciarRonda>
+				<button ng-click="logicaComodin(comodin.id,participante.preguntas, comodin);" ng-disabled="comodin.utilizado">{{comodin.nombre}}</button>
+			</div>
+					
+			
+			<br/>
+			
+			<button ng-click="iniciarRonda = true; conteoRegresivo()" ng-hide="iniciarRonda">Iniciar Ronda</button>
+						
+			<div ng-repeat="preguntaActual in participante.preguntas"
+			ng-show="iniciarRonda && preguntaActual.esPreguntaActual" 
+			ng-init=participante.preguntas[0].esPreguntaActual=true>
+			
+			 {{preguntaActual.pregunta}}
+			 
+			 {{cantidadSegundosResponder}}
+
+			 <p ng-show="mostrarCitaBiblica">Cita biblica : {{preguntaActual.cita}}</p>
+			 
+				<div ng-repeat="respuestas in preguntaActual.respuestas">
+			
+					<button 	
+					ng-click="preguntaActual.contestada=true; $parent.mostrarRepuestaCorrecta = true; preguntaActual.contestadaCorrectamente = respuestas.esLaCorrecta; preguntaActual.rondaPreguntasRespondidas=true; validarRespuesta(respuestas.esLaCorrecta, participante.nombre, ronda.ordenRonda );
+					$parent.mostrarCitaBiblica = true; clicada = true; pararConteoRegresivo()"
+					ng-disabled = "preguntaActual.rondaPreguntasRespondidas"
+					ng-init= "respuestas.visible=true"
+					ng-show="respuestas.visible"
+					> 
+					{{respuestas.respuesta}} 
+					</button>
+					<span ng-show="mostrarRepuestaCorrecta && respuestas.esLaCorrecta">Respuesta Correcta </span>
+					<span ng-show="clicada && !respuestas.esLaCorrecta">Respuesta Incorrecta </span>
+				</div>
+				<br/>
+				<br/>
+				<button ng-click="logicaBotonSiguiente(preguntaActual, participante, ronda.ordenRonda, ronda.participantes);">Siguiente</button>
+				<button ng-click="logicaBotonCancelarPregunta($index,preguntaActual, participante.preguntas)">Cancelar Pregunta</button>
+				<button ng-click="logicaBotonRetirarParticipante(ronda.ordenRonda,participante, ronda.participantes)">Retirar Participante</button>
+				<button>Cancelar Ronda</button>
+			</div>
+			
+			</div>
+		</div>
+	</div>
+	
+	
+	<br/>
+	<br/>
+</div>
+<!--
+<pre>{{ preguntasRepository | json}}</pre>
+<pre>{{ rondas | json}}</pre>
+<pre>{{reporteEstado}}</pre>
+-->
+</div>
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.js"></script>
+<script src="js/scripts.js"></script>
+
+
+</body>
+</html>
