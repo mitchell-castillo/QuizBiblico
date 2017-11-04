@@ -1,0 +1,392 @@
+body, html{
+	font-family: Verdana;
+	font-size: 20px;
+	margin: 0;
+	padding:0;
+}
+body{
+	background-image: url('../images/bg-1.jpg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+
+}
+.jumbotron{
+	background: #4a504f4d;
+	color: #f6e7e7;
+	padding: 2rem 2rem;
+}
+.btn-lg{
+	font-size: 2rem;
+}
+.btn-primary{
+	background-color: #0897f7;
+	border: transparent;
+}
+.btn-primary:hover, .btn-primary:focus{
+	background-color: #0788df;
+}
+.btn-danger{
+	background: rgb(255, 97, 97);
+	border: transparent;
+}
+.btn-danger:hover, .btn-danger:focus{
+	background: #ff4d4d;
+}
+button{
+	cursor: pointer;
+}
+footer{
+	position: relative;
+	left: 0;
+	bottom: -200px;
+	padding: 1rem;
+	background-color: #e8edf3;
+	color: #333;
+	text-align: center;
+}
+.modal-dialog{
+	max-width: 1346px;
+}
+.modal-header{
+	background: #0897f7;
+	text-align: center;
+	color: #fff;
+}
+.modal-title{
+	text-align: center;
+	font-size: 1.5rem;
+	margin-left: 35rem;;
+}
+button.close, button.close:focus{
+	color: #fff;
+}
+.footer-button{
+	margin: 0 auto;
+}
+.form-preparacion{
+	width: 56%;
+	margin: auto;
+}
+.testamento{
+	padding: 1rem;
+	background: #b0aeae;
+	color: #fff;
+	cursor: pointer;
+	margin-bottom: 0.5rem;
+	border-radius: 5px;
+	font-weight: 900;
+}
+.container-form-check{
+	Display: none;
+	width: 95%;
+	margin: auto;
+}
+.form-check-inline {
+    margin-left: 10px;
+}
+.slidecontainer{
+	width: 100%;
+}
+.slider{
+	-webkit-appearance: none;
+	width: 100%;
+	height: 25px;
+	background: #b0aeae;
+	outline: none;
+	opacity: 0.7;
+	transition: 2s;
+	border-radius: 5px;
+}
+.slider:hover {
+	opacity: 1; 
+}	
+/* The slider handle (use webkit (Chrome, Opera, Safari, Edge) and moz (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+	-webkit-appearance: none; /* Override default look */
+	appearance: none;
+	width: 25px; /* Set a specific slider handle width */
+	height: 25px; /* Slider handle height */
+	background: #0897f7; /* Green background */
+	cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+	width: 25px; /* Set a specific slider handle width */
+	height: 25px; /* Slider handle height */
+	background: #0897f7; /* Green background */
+	cursor: pointer; /* Cursor on hover */
+}
+.show-range{
+	width: 100%;
+	color: #212020cc;
+	font-size: 1.5rem;
+	text-align: center;
+	border-radius: 5px;
+}
+.reglas-list{
+	width: 84%;
+	margin: auto;
+}
+.reglas-list li{
+	margin-bottom: 20px;
+}
+.alerts{
+	margin-top: 10px;
+
+}
+.alerts .alert-danger{ 
+	background-color: rgb(255, 97, 97);
+	border-color: rgb(255, 97, 97);
+	color: #fff;
+}
+
+
+
+/*====================================================================================*/
+/*
+/*            AGREGAR LISTA DE PARTICIPANTES 
+/*
+/*====================================================================================*/
+
+
+.participates-add {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 25px;
+  
+}
+
+.participates-add  li {
+	display: inline-block;
+  border: 1px solid black;
+  padding: 5px 10px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  text-transform: capitalize;
+	opacity: 1;
+  transition: all linear 1s;
+}
+
+
+.fa-close {
+  cursor: pointer;
+}
+
+.show{
+	opacity: 1 !important;
+} 
+.hide{
+	opacity: 1 !important;
+} 
+
+/*====================================================================================*/
+/*
+/*            container 
+/*
+/*====================================================================================*/
+
+.container-fluid {
+    width: 100%;
+    padding-right: 0px;
+    padding-left: 0px;
+	
+}
+
+.container-two-page{
+	text-align: center;
+	font-family: sans-serif;
+	font-size: 16px;
+	background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../images/bg-2.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100vh;
+	width: 100%;
+    position: absolute;
+    z-index: 99;
+	display: none;
+}
+ 
+.container-game{
+	margin: 20px auto;
+	max-width: 1800px;
+	padding: 30px 70px 60px;
+	border-radius: 5px;
+	height: 100vh;
+	background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3));
+	
+}
+.header-top{
+	margin-top: 20px;
+	background: #283048; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #283048, #859398); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #283048, #859398); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	color: #f2f2f2;
+	padding: 15px;
+	border-radius: 15px;
+}
+.header-top h2{
+	font-size: 2.5rem;
+}
+.button-init{
+	border: transparent;
+	padding: 15px 30px;
+	font-size: 4rem;
+	margin-top: 200px;
+	color: #fff;
+		background: #283048; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #283048, #859398); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #283048, #859398); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	transition: background 0.2s linear 0s;
+}
+.button-init:hover{
+	background: #4a99e8;
+}
+
+.botones-control{
+	margin-top: 20px;
+}
+.botones-control button{
+	font-size: 1.5rem;
+	background: #283048; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #283048, #859398); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #283048, #859398); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	color: #f2f2f2;
+	border-radius: 15px;
+	padding: 10px 30px;
+	border-color: #333;
+	transition: background 0.5s linear 0s;
+}
+.botones-control button:hover,
+.botones-control button:focus{
+	background: #f2f2f2;
+	color: #222;
+	border: transparent;
+}
+.panel-preguntas{
+	margin-top: 60px;
+	max-width: 1500px;
+}
+.text-preguntas{
+	padding: 20px;
+	border-radius: 10px;
+	background: #283048; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #283048, #859398); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #283048, #859398); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	color: #f2f2f2;
+	font-size: 2rem;
+}
+.mi-tiempo{
+	height: 185px;
+	border-radius: 50%;
+	width: 50%;
+	line-height: 185px;
+	position: absolute;
+	right: -1208px;
+	top: -149px;
+	
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fefcea+0,f1da36+38,f1da36+47,f1da36+58 */
+background: #fefcea; /* Old browsers */
+background: -moz-linear-gradient(top, #fefcea 0%, #f1da36 38%, #f1da36 47%, #f1da36 58%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #fefcea 0%,#f1da36 38%,#f1da36 47%,#f1da36 58%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #fefcea 0%,#f1da36 38%,#f1da36 47%,#f1da36 58%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#f1da36',GradientType=0 ); /* IE6-9 */
+	color: #222;
+	font-family: 'Lobster', cursive;
+	font-size: 6rem;
+
+}
+.panel-comodin-respuestas{
+	margin-top: 80px;
+}
+.resp-botones button{
+	font-size: 1.5rem;
+	background: #283048; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #283048, #859398); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #283048, #859398); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	color: #f2f2f2;
+	border-radius: 15px;
+	border-color: #333;
+	transition: background 0.5s linear 0s;
+}
+.resp-botones  button:hover,
+.resp-botones  button:focus{
+	background: #f2f2f2;
+	color: #222;
+	border: transparent;
+}
+.letter{
+	background: #f2f2f2;
+	float: left;
+	border-radius: 50%;
+	width: 38px;
+	height: 36px;
+	line-height: 36px;
+	color: #222;
+	font-weight: bolder;
+	transition: all 0.5s linear 0s;
+}
+.resp-botones  button:hover .letter,
+.resp-botones  button:focus .letter{
+	background: #283048; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #283048, #859398); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #283048, #859398); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	color: #f2f2f2;
+}
+.comodines{
+	margin: 10px;
+	padding: 50px;
+	border-radius: 30px 0 30px 0px;
+	background: #283048; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #283048, #859398); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #283048, #859398); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	position: absolute;
+	left: 0px;
+	top: -56px;
+	width: 90%;
+}
+.comodin{
+	margin-bottom:20px;
+	border-radius: 20px;
+}
+.comodin button{
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fefcea+0,f1da36+38,f1da36+47,f1da36+58 */
+background: #fefcea; /* Old browsers */
+background: -moz-linear-gradient(top, #fefcea 0%, #f1da36 38%, #f1da36 47%, #f1da36 58%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #fefcea 0%,#f1da36 38%,#f1da36 47%,#f1da36 58%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #fefcea 0%,#f1da36 38%,#f1da36 47%,#f1da36 58%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#f1da36',GradientType=0 ); /* IE6-9 */
+	font-size: 1.5rem;
+	color: #222;
+	border-radius: 15px;
+	border-color: #333;
+	transition: background 0.5s linear 0s;
+}
+.cita{
+background: #283048; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #283048, #859398); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #283048, #859398); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	color: #f2f2f2;
+	padding: 10px;
+	font-size: 1.1rem;
+	border-radius: 10px;
+	margin-bottom: 10px;
+}
+.resp-botones button{
+	width:95%;
+	margin-bottom: 10px;
+}
+
+/******************************************** */
+/*   INICIAR EL JUEGO
+/******************************************
+body{
+			text-align: center;
+			font-family: 'Open Sans Condensed', sans-serif;
+			font-size: 16px;
+			background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../images/bg-2.png');
+			background-repeat: no-repeat;
+			background-size: cover;
+			height: 100vh;
+			
+		

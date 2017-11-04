@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sola scriptura </title>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="../css/bootstrap.css">
+	<link rel="stylesheet" href="css/estilo.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Indie+Flower|Lobster|Open+Sans+Condensed:300" rel="stylesheet"> 
+	<style>
+		*{
+			/*border: 1px solid red;*/
+		}
+		body{
+			text-align: center;
+			font-family: 'Open Sans Condensed', sans-serif;
+			font-size: 16px;
+			background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../images/bg-2.png');
+			background-repeat: no-repeat;
+			background-size: cover;
+			height: 100vh;
+			
+		}
+		.container-game{
+			margin: 20px auto;
+			max-width: 1800px;
+			padding: 30px 70px 60px;
+			border-radius: 5px;
+			height: 90%;
+			background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3));
+			
+		}
+		.header-top{
+			margin-top: 20px;
+			background: #222;
+			color: #f2f2f2;
+			padding: 15px;
+			border-radius: 15px;
+		}
+		.header-top h2{
+			font-size: 2.5rem;
+		}
+		
+		.botones-control{
+			margin-top: 20px;
+		}
+		.botones-control button{
+			font-size: 1.5rem;
+			background: #222;
+			color: #f2f2f2;
+			border-radius: 15px;
+			padding: 10px 30px;
+			border-color: #333;
+			transition: background 0.5s linear 0s;
+		}
+		.botones-control button:hover,
+		.botones-control button:focus{
+			background: #f2f2f2;
+			color: #222;
+			border: transparent;
+		}
+		.panel-preguntas{
+			margin-top: 60px;
+			max-width: 1500px;
+		}
+		.text-preguntas{
+			padding: 20px;
+			border: 2px solid #222;
+			border-radius: 10px;
+			background: #222;
+			color: #f2f2f2;
+			font-size: 2rem;
+		}
+		.mi-tiempo{
+			height: 185px;
+			border-radius: 50%;
+			width: 50%;
+			line-height: 185px;
+			position: absolute;
+			right: -1208px;
+			top: -149px;
+			
+			background: #3e93e6;;
+			color: #f2f2f2;
+			font-family: 'Lobster', cursive;
+			font-size: 6rem;
+
+		}
+		.panel-comodin-respuestas{
+			margin-top: 80px;
+		}
+		.panel-comodin-respuestas button{
+			font-size: 1.5rem;
+			background: #222;
+			color: #f2f2f2;
+			border-radius: 15px;
+			border-color: #333;
+			transition: background 0.5s linear 0s;
+		}
+		.panel-comodin-respuestas button:hover,
+		.panel-comodin-respuestas button:focus{
+			background: #f2f2f2;
+			color: #222;
+			border: transparent;
+		}
+		.letter{
+			background: #f2f2f2;
+			float: left;
+			border-radius: 50%;
+			width: 38px;
+			height: 36px;
+			line-height: 36px;
+			color: #222;
+			font-weight: bolder;
+			transition: all 0.5s linear 0s;
+		}
+		.panel-comodin-respuestas button:hover .letter,
+		.panel-comodin-respuestas button:focus .letter{
+			background: #222;
+			color: #f2f2f2;
+		}
+		.comodines{
+			margin: 10px;
+			padding: 50px;
+			border-radius: 30px 0 30px 0px;
+			background: #222;
+			position: absolute;
+			left: 0px;
+			top: -93px;
+			width: 90%;
+		}
+		.comodin{
+			margin-bottom:20px;
+			border-radius: 20px;
+		}
+		.comodin button{
+			background: #3e93e6;
+			transition: all 0.5s linear 0s;
+		}
+		.cita{
+			background: #222;
+			color: #f2f2f2;
+			padding: 10px;
+			font-size: 1.1rem;
+			border-radius: 10px;
+			margin-bottom: 10px;
+		}
+		.resp-botones button{
+			width:95%;
+			margin-bottom: 10px;
+		}
+		
+	</style>
+</head>	
+<body>
+	
+	
+	<div class="container-game">
+		<div class="row header-top">
+			<div class="col-md-4 text-left">
+				<h2>Pregunta: 1</h2>
+			</div>
+			<div class="col-md-4">
+				<h2>"Los 12 Discipulos"</h2>
+			</div>
+			<div class="col-md-4 text-right">
+				<h2>Ronda: 1</h2>
+			</div>
+		</div>
+		<div class="row botones-control">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<div class="row">
+					<div class="col-md-3">
+					<button class="btn btn-primary">Siguiente</button>
+					</div>
+					<div class="col-md-3">
+						<button class="btn btn-primary">Cancelar Pregunta</button>
+					</div>
+					<div class="col-md-3">
+						<button class="btn btn-primary">Retirar Participante</button>
+					</div>
+					<div class="col-md-2">
+					<button class="btn btn-primary">Cancelar Ronda</button>
+					</div>
+				</div>
+				
+			</div>			
+			<div class="col-md-3"></div>
+		</div>
+		<div class="row panel-preguntas">
+			<div class="col-md-12">
+				<p class="text-preguntas">Con que Limpiara el Joven su camino?</p>
+			</div>
+			<div class="col-md-3">
+				<p class="mi-tiempo">25</p>
+			</div>
+		</div>
+		<div class="row panel-comodin-respuestas">
+			<div class="col-md-2">
+				<div class="comodines">
+					<div class="comodin"><button class="btn btn-primary btn-block">50/50</button></div>
+					<div class="comodin"><button class="btn btn-primary btn-block">Biblia</button></div>
+					<div class="comodin"><button class="btn btn-primary btn-block">Ayuda</button></div>
+				</div>
+				
+			</div>
+			<div class="col-md-10">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="cita">
+							<h4>Cita Biblica</h4>
+							<p><em>Con Que Limpiara el Joven su caminoa Con Guardar Tu Palabra<span>Salmo 119:9</span></em></p>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="row">
+						
+							<div class="col-md-3 resp-botones">
+								<button class="btn btn-primary"><span class="letter">A</span>Con el Dinero</button>
+							</div>								
+							<div class="col-md-3 resp-botones">
+								<button class="btn btn-primary"><span class="letter">B</span>Con la Fama</button>
+							</div>
+							<div class="col-md-3 resp-botones">
+								<button class="btn btn-primary"><span class="letter">C</span>Con el Agua</button>
+							</div>
+							<div class="col-md-3 resp-botones">
+								<button class="btn btn-primary"><span class="letter">D</span>Con la Palabra de Dios</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+<!-- JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+<script src="js/scripts.js"></script>
+
+
+</body>
+</html>
+
+</head>
+<body >
