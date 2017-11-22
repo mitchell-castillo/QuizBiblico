@@ -1,8 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<title>Sola scriptura </title>
 	<meta charset="UTF-8" />
+
+
 	<link rel="stylesheet" href="css/alertify.min.css">
 	<link rel="stylesheet" href="css/efault.min.css">
 	<link rel="stylesheet" href="css/bootstrap.css">
@@ -35,7 +37,7 @@
 		<!-- Botones Disparadores del juegos y las reglas del juego -->
 		<section class="container" style="margin-top: 35rem;">
 			<div class="d-flex justify-content-center align-items-center align-content-center flex-column">
-				<button class="btn  btn-lg btn-primary" style="margin-bottom: 20px; padding: 10px 40px;" data-toggle="modal" data-target="#modal-iniciar-juego">
+				<button class="btn  btn-lg btn-primary" style="margin-bottom: 20px; padding: 10px 40px;" data-toggle="modal" data-target="#modal-iniciar-juego" ng-click="logicabotonJugar()"> 
 					Jugar
 				</button>
 				<button class="btn  btn-lg btn-primary" style="padding: 10px 20px;" data-toggle="modal" data-target="#reglasJuego" >
@@ -142,37 +144,50 @@
 							</li>
 						  </ul>
 						  </div>
-						  <div class="form-group">
-							<label for="Equipos">Libros de la Biblia</label> 
-							<div class="antiguo-test testamento" id="testamento-1">Antiguo Testamento
-								<div class="pull-right" style="color: #ccc">
-									<a href="#" id="plus"><i class="fa fa-plus fa-lg" aria-hidden="true"></i></a>
-								</div>
-							</div>
-								<div class="container-form-check row" id="form-check-1">
-									
-								</div><!--  container-form-check  -->
-							<div class="nuevo-test testamento" id="testamento-2">Nuevo Testamento
-								<div class="pull-right" style="color: #ccc">
-									<a href="#" id="plus"><i class="fa fa-plus fa-lg" aria-hidden="true"></i></a>
-								</div>
-							</div>
-								<div class="container-form-check row" id="form-check-2">
-									
-									
-								</div><!--  container-form-check  -->
-						  </div>
-						  <style>
-						  
-							</style>
-						  <div class="form-group">
-							<label for="">Cantidad Segundos para Responder </label> 
-							<div id="slidecontainer">
-							  <input type="range" min="1" max="180" value="30" class="slider" name="cantidadSegundosResponder" id="myRange" ng-model="cantidadSegundosResponder">
-							  <div id="showRange" class="show-range"></div>
-							</div>
-						  </div>
-						</form>
+
+                            <div class="form-group">
+                                {{librosBibliaSeleccionados}}
+                                <br />
+                                <label ng-repeat="libros in librosBiblia">
+                                    <input type="checkbox" checklist-model="librosBibliaSeleccionados" checklist-value="libros.id"> {{libros.nombre}}
+                                </label>
+
+                            </div>
+
+
+                                <div class="form-group">
+                                    <label for="Equipos">Libros de la Biblia</label>
+                                    <div class="antiguo-test testamento" id="testamento-1">
+                                        Antiguo Testamento
+                                        <div class="pull-right" style="color: #ccc">
+                                            <a href="#" id="plus"><i class="fa fa-plus fa-lg" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="container-form-check row" id="form-check-1">
+
+                                    </div><!--  container-form-check  -->
+                                    <div class="nuevo-test testamento" id="testamento-2">
+                                        Nuevo Testamento
+                                        <div class="pull-right" style="color: #ccc">
+                                            <a href="#" id="plus"><i class="fa fa-plus fa-lg" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="container-form-check row" id="form-check-2">
+
+
+                                    </div><!--  container-form-check  -->
+                                </div>
+                                <style>
+
+                                </style>
+                                <div class="form-group">
+                                    <label for="">Cantidad Segundos para Responder </label>
+                                    <div id="slidecontainer">
+                                        <input type="range" max="180" value="30" class="slider" name="cantidadSegundosResponder" id="myRange" ng-model="cantidadSegundosResponder">
+                                        <div id="showRange" class="show-range"></div>
+                                    </div>
+                                </div>
+</form>
 					</div>
 				  <div class="modal-footer">
 					<div class="footer-button">
@@ -216,7 +231,7 @@
 							<button class="btn btn-primary" ng-click="logicaBotonSiguiente(preguntaActual, participante, ronda.ordenRonda, ronda.participantes);">Siguiente</button>
 							</div>
 							<div class="col-md-3">
-								<button class="btn btn-primary" ng-click="logicaBotonCancelarPregunta($index,preguntaActual, participante.preguntas)">Cancelar Pregunta</button>
+								<button class="btn btn-primary" ng-click="logicaBotonCancelarPregunta($index,preguntaActual, participante.preguntas, ronda.ordenRonda, participante, ronda.participantes )">Cancelar Pregunta</button>
 							</div>
 							<div class="col-md-3">
 								<button class="btn btn-primary" ng-click="logicaBotonRetirarParticipante(ronda.ordenRonda,participante, ronda.participantes)">Retirar Participante</button>
@@ -237,7 +252,7 @@
 							<div class="col-md-2">
 								<div class="comodines">
 									<div class="comodin"  ng-repeat="comodin in participante.comodines" ng-show=iniciarRonda>
-										<button class="btn btn-primary btn-block" ng-click="logicaComodin(comodin.id,participante.preguntas, comodin);" ng-disabled="comodin.utilizado">
+										<button class="btn btn-primary btn-block" ng-click="logicaComodin(comodin.id,preguntaActual, comodin);" ng-disabled="comodin.utilizado">
 											{{comodin.nombre}}
 										</button>
 									</div>
@@ -254,18 +269,14 @@
 									<div class="col-md-12">
 										<div class="row">
 											<div class="col-md-6 resp-botones" ng-repeat="respuestas in preguntaActual.respuestas">
-												<button class="btn btn-primary" ng-click="preguntaActual.contestada=true; $parent.mostrarRepuestaCorrecta = true; preguntaActual.contestadaCorrectamente = respuestas.esLaCorrecta; preguntaActual.rondaPreguntasRespondidas=true; validarRespuesta(respuestas.esLaCorrecta, participante.nombre, ronda.ordenRonda );
-															$parent.mostrarCitaBiblica = true; clicada = true; pararConteoRegresivo()"
+                                                <!--preguntaActual.contestada=true; $parent.mostrarRepuestaCorrecta = true; preguntaActual.contestadaCorrectamente = respuestas.esLaCorrecta; preguntaActual.rondaPreguntasRespondidas=true; validarRespuesta(respuestas.esLaCorrecta, participante.nombre, ronda.ordenRonda );-->
+												<button class="btn btn-primary" ng-click="logicaBotonRespuesta(preguntaActual, respuestas, participante, ronda); clicada = true;"
 															ng-disabled = "preguntaActual.rondaPreguntasRespondidas"
 															ng-init= "respuestas.visible=true"
-															ng-show="respuestas.visible">
-												<span class="letter">A</span>  {{respuestas.respuesta}}</button>
-												<div class="alert alert-success" role="alert" ng-show="mostrarRepuestaCorrecta && respuestas.esLaCorrecta">
-														Respuesta Correcta
-													</div>
-													<div class="alert alert-danger" role="alert" ng-show="clicada && !respuestas.esLaCorrecta">
-														Respuesta Incorrecta 
-													</div>
+															ng-show="respuestas.visible"
+                                                            ng-style="(clicada && !respuestas.esLaCorrecta ) && {'color':'red'} || ($parent.mostrarRepuestaCorrecta && respuestas.esLaCorrecta) && {'color':'green'}  || '' "
+                                                        >
+												<span class="letter">{{letras[$index].letra}}</span>  {{respuestas.respuesta}}</button>
 											</div>
 										</div>
 									</div>
@@ -345,7 +356,7 @@
 <!-- JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 <script src="js/scripts.js"></script>
-
+<script src="js/checklist-model.js"></script>
 
 </body>
 </html>

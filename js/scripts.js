@@ -1,4 +1,6 @@
-var app = angular.module('myApp', []);
+
+var app = angular.module('myApp', ["checklist-model"]);
+
 
 //Mis Variables
 let body 	= document.body;
@@ -6,26 +8,79 @@ let onePage = document.getElementById("page-one");
 let twoPage = document.getElementById("page-two");
 let footer 	= document.getElementById("footer");
 	
-app.controller('jsCtrl', function($scope, $interval, $http) {
+app.controller('jsCtrl', function ($scope, $interval, $http) {
+
+
+    //Este metodo organiza un arreglo de manera aleatoria
+    $scope.shuffleArray = function (array) {
+        var m = array.length, t, i;
+
+        // While there remain elements to shuffle
+        while (m) {
+            // Pick a remaining element…
+            i = Math.floor(Math.random() * m--);
+
+            // And swap it with the current element.
+            t = array[m];
+            array[m] = array[i];
+            array[i] = t;
+        }
+
+        return array;
+    }
+
+
+    $scope.logicabotonJugar = function()
+    {
+        $scope.preguntasRepository = $scope.buscarPreguntas();
+    };
+
+    //Este metodo busca todas las preguntas en el repositorio de preguntas y a las organiza aleatoreamente, tambien organiza las respuestas de cada pregunta aleatoriamente
 	$scope.buscarPreguntas = function() {
 			
 			return $http.get("https://raw.githubusercontent.com/ukkanes/QuizBiblico/master/preguntas.js").then(function(response) {
 					
-					$scope.preguntasRepository = response.data;
-				});
+                $scope.preguntasRepository = response.data;
+
+            }).then(function () {
+                
+                $scope.preguntasRepository = $scope.shuffleArray($scope.preguntasRepository);
+
+                angular.forEach($scope.preguntasRepository, function (preguntas, index) {
+
+                    $scope.preguntasRepository[index].Respuestas = $scope.shuffleArray($scope.preguntasRepository[index].Respuestas);
+
+                });
+
+            });
   		};
+		
 	
-	
-	
-    $scope.cantidadRondas = 1;
+    $scope.cantidadRondas = 2;
     $scope.cantidadPreguntasPorRonda = 2; 
-    $scope.participantes = [];
+    $scope.participantes = ["Juan Mitchell","Carlos Pineda"];
     $scope.preguntasRepository = [];
     $scope.rondas =[];
 	$scope.cantidadSegundosResponder = 30;
 	$scope.cantidadSegundosResponderReinicio;
 	$scope.reporteEstado = []; //estimar si eliminar esta variable
-	$scope.resultadoParticipantes = [];
+    $scope.resultadoParticipantes = [];
+    $scope.librosBiblia =
+        [
+            { id: 1, nombre: 'Genesis', testamento: 'A' },
+            { id: 2, nombre: 'Exodo', testamento: 'A' },
+            { id: 3, nombre: 'Levitico', testamento: 'A' },
+            { id: 4, nombre: 'Libro nuevo testamento', testamento: 'N' }
+        ];
+
+    $scope.letras = [
+        { letra: "A" },
+        { letra: "B" },
+        { letra: "C" },
+        { letra: "D" }
+    ]
+
+    $scope.librosBibliaSeleccionados = [];
 	
 	//indicadores
 	$scope.mostrarCitaBiblica;
@@ -33,7 +88,7 @@ app.controller('jsCtrl', function($scope, $interval, $http) {
 	//
 	var intervalo;
 	
-	$scope.preguntasRepository = $scope.buscarPreguntas();
+	//$scope.preguntasRepository = $scope.buscarPreguntas();
 	
     $scope.comodines = 
     [
@@ -120,7 +175,7 @@ app.controller('jsCtrl', function($scope, $interval, $http) {
 					
                     for (var ii=0; ii<$scope.cantidadPreguntasPorRonda; ii++) 
                     {                  
-						//alert($scope.preguntasRepository);
+
 						$scope.rondas[i].participantes[key].preguntas.push
 						({
 							pregunta : $scope.preguntasRepository[0].Descripcion,
@@ -151,8 +206,8 @@ app.controller('jsCtrl', function($scope, $interval, $http) {
 		intervalo = $interval(function(){
 		
 		if ($scope.cantidadSegundosResponder != 0)
-		{
-			$scope.cantidadSegundosResponder--
+        {
+            $scope.cantidadSegundosResponder--;
 		}
 		else{
 			$scope.pararConteoRegresivo(); 
@@ -175,34 +230,76 @@ app.controller('jsCtrl', function($scope, $interval, $http) {
 			});
 		}
 		
-	}
+    }
+
+    //Este metodo filtra del repositorio de preguntas, todas las preguntas relacionadas a libros seleccionados
+    $scope.filtrarPreguntasPorLibro = function ()
+    {
+        
+        //Solo se seleccionaron libros, el sistema filtrara por libros de lo contrario el sistema usara todas las preguntas de la biblia
+        if ($scope.librosBibliaSeleccionados.length > 0)
+        {
+            var preguntasFiltradas = [];
+            angular.forEach($scope.preguntasRepository, function (preg, index) {
+
+                angular.forEach($scope.librosBibliaSeleccionados, function (libroId, index) {
+
+                    if (preg.Libro == libroId) {
+                        preguntasFiltradas.push(preg);
+
+                    }
+
+                });
+
+            });
+
+            $scope.preguntasRepository = preguntasFiltradas;
+        }
+
+
+    }
+        
+
 	
 	$scope.iniciarJuego = function(valor) 
 	{
-	
+
+        //Cuando no sea provisto un valor de cantidad de segundos preguntas, el sistema tomará como valor por defecto: 30.
+        if ($scope.cantidadSegundosResponder <= 0)
+        {
+            $scope.cantidadSegundosResponder = 30;
+        }
+
+            $scope.filtrarPreguntasPorLibro();
+
 		    $scope.cantidadSegundosResponderReinicio = $scope.cantidadSegundosResponder;
 		
 			$scope.rondas = [];
-			
-			
-			
+
+
 			if ($scope.validarCantidadPreguntas())
 			{
 				
 				$scope.armarExtructuraJuego();
 				
 				//muestro la ronda 1 
-				$scope.rondas[0].rondaVigente = true;
-				
-			}
+                $scope.rondas[0].rondaVigente = true;
+
+                //ocultar la pantalla principal
+                body.style.backgroundColor = "#fff";
+                onePage.style.display = "none";
+                footer.style.display = "none";
+
+                //presentar la pantalla secundaria
+                twoPage.style.display = "block"
+                
+            }
+            else
+            {
+                
+            }
 			
-			//ocultar la pantalla principal
-			body.style.backgroundColor = "#fff";
-			onePage.style.display = "none";
-			footer.style.display = "none";
 			
-			//presentar la pantalla secundaria
-			twoPage.style.display = "block"
 				
         };
     	
@@ -210,10 +307,9 @@ app.controller('jsCtrl', function($scope, $interval, $http) {
 	{
 		comodin.utilizado = true;
 		if (id == 1) // logica comodin 5050
-		{
-				angular.forEach(pregunta, function (preg, index) {
+        {
 				var contador = 0;				
-				angular.forEach(preg.respuestas, function (resp, index) {
+                angular.forEach(pregunta.respuestas, function (resp, index) {
 				
 					if (!resp.esLaCorrecta && contador !=2)
 					{
@@ -221,7 +317,7 @@ app.controller('jsCtrl', function($scope, $interval, $http) {
 						contador++;
 					}
 				})
-			});
+		
 			
 		}
 		
@@ -232,20 +328,8 @@ app.controller('jsCtrl', function($scope, $interval, $http) {
 		
 	}
 	
-	$scope.reiniciarComodin5050 = function(preguntas)
-	{
-		angular.forEach(preguntas, function (preg, index) {
-			var contador = 0;
-			
-			angular.forEach(preg.respuestas, function (resp, index) {
-					resp.visible = true;
-					contador++;
-			})
-			
-		});
-	}
 	
-	$scope.logicaBotonCancelarPregunta = function(index, preguntaActual, preguntasRondaParticipante)
+    $scope.logicaBotonCancelarPregunta = function (index, preguntaActual, preguntasRondaParticipante, ordenRondaParam, participante, participantesRondas)
 	{
 		//Cuando se seleccione el botón de Cancelar Pregunta:
 		//El sistema requerirá la confirmación del usuario.
@@ -254,11 +338,21 @@ app.controller('jsCtrl', function($scope, $interval, $http) {
 		//El sistema pasará a la siguiente pregunta, sin tener un resultado de la pregunta actual.
 		if (confirmacionusuario == true)
 		{
-			$scope.pasarSiguientePregunta(preguntaActual,preguntasRondaParticipante );
-			
-			//El sistema actualizará la pregunta como Procesada.
-			preguntaActual.contestada = true;
-			
+            //El sistema actualizará la pregunta como Procesada.
+            preguntaActual.contestada = true;
+
+            //validar si existen preguntas pendientes 
+            if ($scope.validaExistenMasPreguntasPorRealizarPorParticipanteRonda(preguntasRondaParticipante)) {
+
+                $scope.pasarSiguientePregunta(preguntaActual, preguntasRondaParticipante);
+            }
+            else // si no existen tengo que terminar la ronda 
+            {
+                $scope.retirarParticipante(ordenRondaParam, participante, participantesRondas);
+            }
+
+            
+					
 		}
 		
 		
@@ -279,14 +373,15 @@ app.controller('jsCtrl', function($scope, $interval, $http) {
 	}
 	
 	$scope.buscarIndiceSiguientePreguntaPorRondaPorUusuario = function(preguntasParticipanteRonda)
-	{
+    {      
 		var indiceSiguientePregunta = 0;
 		angular.forEach(preguntasParticipanteRonda, function (preg, index) {
 		
 			if (preg.contestada == false)
-			{
+            {
 				indiceSiguientePregunta = index;
-			}
+            }
+
 		});
 		return indiceSiguientePregunta;
 	}
@@ -346,15 +441,20 @@ app.controller('jsCtrl', function($scope, $interval, $http) {
 		});
 		return cantidadPreguntasContestadasCorrectamente;
 	}
-	
+
 	$scope.pasarSiguientePregunta = function(preguntaActual, preguntasParticipante)
-	{
+    {
+        $scope.mostrarRepuestaCorrecta = false;
 		$scope.mostrarCitaBiblica = false;
 		preguntaActual.esPreguntaActual = false;
 		$scope.conteoRegresivo();
 				
-		preguntaActual.esPreguntaActual = false;
-		preguntasParticipante[$scope.buscarIndiceSiguientePreguntaPorRondaPorUusuario(preguntasParticipante)].esPreguntaActual = true;
+        preguntaActual.esPreguntaActual = false;
+
+        
+            preguntasParticipante[$scope.buscarIndiceSiguientePreguntaPorRondaPorUusuario(preguntasParticipante)].esPreguntaActual = true;
+        
+		
 	}
 	
 	$scope.logicaBotonSiguiente = function(preguntaActual, participante, ordenRondaParam, participantesRondas)
@@ -372,16 +472,15 @@ app.controller('jsCtrl', function($scope, $interval, $http) {
 			//Cuando el usuario no haya seleccionado una respuesta, el sistema requerirá la confirmación del usuario.
 			if (!preguntaActual.contestada)
 			{
-				//estaSeguroQueDeseaContinuar = confirm("Esta seguro que desea continuar");
-				estaSeguroQueDeseaContinuar = bootbox.confirm("Esta seguro que desea continuar", function(result){ console.log('This was logged in the callback: ' + result); });
+				estaSeguroQueDeseaContinuar = confirm("Esta seguro que desea continuar");
+				//estaSeguroQueDeseaContinuar = bootbox.confirm("Esta seguro que desea continuar", function(result){ console.log('This was logged in the callback: ' + result); });
 
-			
 				//Si el usuario indica que está seguro de pasar la pregunta sin respuesta:
 				if (estaSeguroQueDeseaContinuar)
 				{
 					//El sistema actualiza la pregunta actual indicando que se encuentra Disponible.
-					preguntaActual.contestada = false;
-					
+                    preguntaActual.contestada = false;
+
 					//El sistema pasa a la siguiente pregunta.
 					$scope.pasarSiguientePregunta(preguntaActual, participante.preguntas);
 					
@@ -392,7 +491,7 @@ app.controller('jsCtrl', function($scope, $interval, $http) {
 				}
 			}
 			else
-			{
+            {
 				//El sistema pasa a la siguiente pregunta.
 				$scope.pasarSiguientePregunta(preguntaActual, participante.preguntas);
 			}
@@ -406,10 +505,11 @@ app.controller('jsCtrl', function($scope, $interval, $http) {
 	}
 	
 	$scope.retirarParticipante = function(ordenRondaParam,participante, participantesRondas)
-	{
+    {
+            $scope.mostrarRepuestaCorrecta = false;
 			$scope.mostrarCitaBiblica = false;
-		//El sistema muestra un mensaje de finalización al usuario.
-			alert("Usuario finalizo su ronda");
+		    //El sistema muestra un mensaje de finalización al usuario.
+            alert("Usuario finalizo su ronda");
 			participante.participanteFinalizoEstaRonda = true;
 			participante.participanteActual = false;
 			//participanteFinalizoEstaRonda
@@ -438,11 +538,11 @@ app.controller('jsCtrl', function($scope, $interval, $http) {
 					//Cuando existan rondas por procesar, El sistema reinicia la pantalla, para mostrar las preguntas a realizar al primer participante para la siguiente ronda
 					$scope.rondas[ordenRondaParam].rondaVigente = true;
 					
-					
 				}
 				else //Cuando NO existan más rondas disponibles, según la cantidad de rondas proporcionadas, el sistema realizará lo siguiente:
 				{
-						alert("Muestra una pantalla con el resultado de cada participante por rondas ordenado en orden Descendente por la Cantidad de Respuestas Acertadas (9-1).  Los datos a mostrar serán los siguientes:");
+                    //alert("Muestra una pantalla con el resultado de cada participante por rondas ordenado en orden Descendente por la Cantidad de Respuestas Acertadas (9-1).  Los datos a mostrar serán los siguientes:");
+                    alert(JSON.stringify($scope.resultadoParticipantes));
 				}
 			}
 	}
@@ -457,7 +557,18 @@ app.controller('jsCtrl', function($scope, $interval, $http) {
 	{
 		
 	}
-	
+
+    $scope.logicaBotonRespuesta = function (preguntaActual, respuestas, participante, ronda)
+    {
+        preguntaActual.contestada = true;
+        $scope.mostrarRepuestaCorrecta = true;
+        preguntaActual.contestadaCorrectamente = respuestas.esLaCorrecta;
+        preguntaActual.rondaPreguntasRespondidas = true;
+        $scope.validarRespuesta(respuestas.esLaCorrecta,participante.nombre, ronda.ordenRonda);
+        $scope.mostrarCitaBiblica = true;
+        $scope.pararConteoRegresivo();
+    }
+
 	//Agregar participantes a la lista
 	$scope.addParticipante = function() {
 		
