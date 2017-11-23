@@ -1,9 +1,8 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Sola scriptura </title>
 	<meta charset="UTF-8" />
-
 
 	<link rel="stylesheet" href="css/alertify.min.css">
 	<link rel="stylesheet" href="css/efault.min.css">
@@ -231,13 +230,13 @@
 							<button class="btn btn-primary" ng-click="logicaBotonSiguiente(preguntaActual, participante, ronda.ordenRonda, ronda.participantes);">Siguiente</button>
 							</div>
 							<div class="col-md-3">
-								<button class="btn btn-primary" ng-click="logicaBotonCancelarPregunta($index,preguntaActual, participante.preguntas, ronda.ordenRonda, participante, ronda.participantes )">Cancelar Pregunta</button>
+								<button class="btn btn-primary" ng-click="logicaBotonCancelarPregunta($index,preguntaActual, participante.preguntas, ronda.ordenRonda, participante, ronda.participantes )" ng-disabled="deshabilitarBotonCancelarPregunta" > Cancelar Pregunta</button>
 							</div>
 							<div class="col-md-3">
 								<button class="btn btn-primary" ng-click="logicaBotonRetirarParticipante(ronda.ordenRonda,participante, ronda.participantes)">Retirar Participante</button>
 							</div>
 							<div class="col-md-3">
-							<button class="btn btn-primary">Cancelar Ronda</button>
+							<button class="btn btn-primary" ng-click="logicaBotonCancelarRonda(ronda.ordenRonda)">Cancelar Ronda</button>
 							</div>		
 						</div>
 						<div class="row panel-preguntas">
