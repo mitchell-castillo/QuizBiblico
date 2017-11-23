@@ -55,7 +55,7 @@ app.controller('jsCtrl', function ($scope, $interval, $http) {
             });
   		};
 		
-	
+	$scope.deshabilitarBotonCancelarPregunta = false;
     $scope.cantidadRondas = 2;
     $scope.cantidadPreguntasPorRonda = 2; 
     $scope.participantes = ["Juan Mitchell","Carlos Pineda"];
@@ -444,17 +444,16 @@ app.controller('jsCtrl', function ($scope, $interval, $http) {
 
 	$scope.pasarSiguientePregunta = function(preguntaActual, preguntasParticipante)
     {
+		$scope.deshabilitarBotonCancelarPregunta = false;
         $scope.mostrarRepuestaCorrecta = false;
 		$scope.mostrarCitaBiblica = false;
 		preguntaActual.esPreguntaActual = false;
 		$scope.conteoRegresivo();
 				
         preguntaActual.esPreguntaActual = false;
-
-        
-            preguntasParticipante[$scope.buscarIndiceSiguientePreguntaPorRondaPorUusuario(preguntasParticipante)].esPreguntaActual = true;
-        
 		
+        preguntasParticipante[$scope.buscarIndiceSiguientePreguntaPorRondaPorUusuario(preguntasParticipante)].esPreguntaActual = true;
+        
 	}
 	
 	$scope.logicaBotonSiguiente = function(preguntaActual, participante, ordenRondaParam, participantesRondas)
@@ -492,6 +491,12 @@ app.controller('jsCtrl', function ($scope, $interval, $http) {
 			}
 			else
             {
+				//Si la pregunta actual fue contestada y la misma fue contestada incorrectamente, entonces el sistema debe sacar el participante de la ronda actual
+				if(preguntaActual.contestada && !preguntaActual.contestadaCorrectamente)
+				{
+				    $scope.retirarParticipante(ordenRondaParam,participante, participantesRondas);
+				}
+				
 				//El sistema pasa a la siguiente pregunta.
 				$scope.pasarSiguientePregunta(preguntaActual, participante.preguntas);
 			}
@@ -504,27 +509,9 @@ app.controller('jsCtrl', function ($scope, $interval, $http) {
 		
 	}
 	
-	$scope.retirarParticipante = function(ordenRondaParam,participante, participantesRondas)
-    {
-            $scope.mostrarRepuestaCorrecta = false;
-			$scope.mostrarCitaBiblica = false;
-		    //El sistema muestra un mensaje de finalización al usuario.
-            alert("Usuario finalizo su ronda");
-			participante.participanteFinalizoEstaRonda = true;
-			participante.participanteActual = false;
-			//participanteFinalizoEstaRonda
-			//El sistema guarda un registro en el repositorio Resultado Participantes, conteniendo los siguientes datos:
-			$scope.guardarResultadoParticipante(ordenRondaParam,participante.nombre, $scope.buscarCantidadPreguntasCorrectasPorParticipanteRonda(participante.preguntas));
-			
-			//El sistema valida si existen más participantes para la ronda actual:			
-			if ($scope.validarExistenMasParticipantesParaRondaActual(participantesRondas))
-			{
-				//Cuando existan más participantes para la ronda actual, El sistema reinicia la pantalla, para mostrar las preguntas a realizar al siguiente participante para la misma ronda, considerando lo siguiente:
-				participantesRondas[$scope.buscarIndiceProximoParticipantesParaRondaActual(participantesRondas)].participanteActual = true;
-				
-			}
-			else //El sistema valida si existen más rondas por procesar, calculando la cantidad de rondas proporcionadas, menos las rondas procesadas.
-			{
+	//Este metodo cancela la ronda en curso
+	$scope.cancelarRonda = function(ordenRondaParam)
+	{
 				//Cuando NO existan más participantes, el sistema da por terminada la primera ronda (mensaje por pantalla)
 				alert("Ronda finalizada");
 				$scope.rondas[ordenRondaParam-1].rondaProcesada = true;
@@ -544,6 +531,56 @@ app.controller('jsCtrl', function ($scope, $interval, $http) {
                     //alert("Muestra una pantalla con el resultado de cada participante por rondas ordenado en orden Descendente por la Cantidad de Respuestas Acertadas (9-1).  Los datos a mostrar serán los siguientes:");
                     alert(JSON.stringify($scope.resultadoParticipantes));
 				}
+	}
+	
+	
+	
+	$scope.retirarParticipante = function(ordenRondaParam,participante, participantesRondas)
+    {
+			$scope.deshabilitarBotonCancelarPregunta = false;
+            $scope.mostrarRepuestaCorrecta = false;
+			$scope.mostrarCitaBiblica = false;
+		    //El sistema muestra un mensaje de finalización al usuario.
+            alert("Usuario finalizo su ronda");
+			participante.participanteFinalizoEstaRonda = true;
+			participante.participanteActual = false;
+			//participanteFinalizoEstaRonda
+			//El sistema guarda un registro en el repositorio Resultado Participantes, conteniendo los siguientes datos:
+			$scope.guardarResultadoParticipante(ordenRondaParam,participante.nombre, $scope.buscarCantidadPreguntasCorrectasPorParticipanteRonda(participante.preguntas));
+			
+			//El sistema valida si existen más participantes para la ronda actual:			
+			if ($scope.validarExistenMasParticipantesParaRondaActual(participantesRondas))
+			{
+				//Cuando existan más participantes para la ronda actual, El sistema reinicia la pantalla, para mostrar las preguntas a realizar al siguiente participante para la misma ronda, considerando lo siguiente:
+				participantesRondas[$scope.buscarIndiceProximoParticipantesParaRondaActual(participantesRondas)].participanteActual = true;
+				
+			}
+			else //El sistema valida si existen más rondas por procesar, calculando la cantidad de rondas proporcionadas, menos las rondas procesadas.
+			{
+				
+				$scope.cancelarRonda(ordenRondaParam);
+				
+				/*
+				//Cuando NO existan más participantes, el sistema da por terminada la primera ronda (mensaje por pantalla)
+				alert("Ronda finalizada");
+				$scope.rondas[ordenRondaParam-1].rondaProcesada = true;
+				$scope.rondas[ordenRondaParam-1].rondaVigente = false;
+				
+				//El sistema valida si existen más rondas por procesar, calculando la cantidad de rondas proporcionadas, menos las rondas procesadas.
+				var validacion = $scope.validarExistenMasRondas($scope.rondas);
+				
+				if (validacion)
+				{
+					//Cuando existan rondas por procesar, El sistema reinicia la pantalla, para mostrar las preguntas a realizar al primer participante para la siguiente ronda
+					$scope.rondas[ordenRondaParam].rondaVigente = true;
+					
+				}
+				else //Cuando NO existan más rondas disponibles, según la cantidad de rondas proporcionadas, el sistema realizará lo siguiente:
+				{
+                    //alert("Muestra una pantalla con el resultado de cada participante por rondas ordenado en orden Descendente por la Cantidad de Respuestas Acertadas (9-1).  Los datos a mostrar serán los siguientes:");
+                    alert(JSON.stringify($scope.resultadoParticipantes));
+				}
+				*/
 			}
 	}
 	
@@ -553,13 +590,14 @@ app.controller('jsCtrl', function ($scope, $interval, $http) {
 		$scope.retirarParticipante(ordenRondaParam,participante, participantesRondas);
 	}
 	
-	$scope.logicaBotonCancelarRonda = function(index, listaParticipantes)
+	$scope.logicaBotonCancelarRonda = function(ordenRondaParam)
 	{
-		
+		$scope.cancelarRonda(ordenRondaParam);
 	}
 
     $scope.logicaBotonRespuesta = function (preguntaActual, respuestas, participante, ronda)
     {
+		$scope.deshabilitarBotonCancelarPregunta = true;
         preguntaActual.contestada = true;
         $scope.mostrarRepuestaCorrecta = true;
         preguntaActual.contestadaCorrectamente = respuestas.esLaCorrecta;
